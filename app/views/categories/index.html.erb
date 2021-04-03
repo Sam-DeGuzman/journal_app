@@ -1,0 +1,25 @@
+<div class="row justify-content-end">
+<div class="col-sm-3 justify-content-end">
+<%= link_to "📓Add New Category", new_category_path,class:"btn btn-success mb-2" %>
+</div>
+</div>
+
+<% if @user_categories.any? %>
+  
+<div class="row">
+ <% @user_categories.each do |category| %>
+    <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= category.category_name %></h5>
+        <p class="card-text"><%= category.description %></p>
+         <td><%= link_to 'Edit Category', edit_category_path(category.id), class:"btn btn-info text-light"%></td>
+         <td><%= link_to ' Delete Category', Category.find_by_id(category.id), method: :delete, data: { confirm: "Confirm deleting '#{category.category_name}' ?" },class:"btn btn-danger" %></td>  
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+  <% else %>
+<%= render 'partials/noitems' %>
+  <% end %>

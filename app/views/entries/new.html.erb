@@ -1,0 +1,49 @@
+<style>
+    .trix-button-group--file-tools { display: none !important; }
+</style>
+
+<%= form_with url: create_entry_path, html: {class: "form-floating mb-3"} do |f|%>
+
+<div class="container">
+    <div style="text-align:center;margin:auto;" class="col-md-8 form-floating mb-3">
+        <p>
+            <%= f.hidden_field :user_id, id: :entry_user_id, :value => current_user.id %>
+        </p>
+    
+        <p>
+            <%= f.label :category_id ,class:"fw-bold"%> <br />
+            <%# <%= f.text_field :topic_id, class:"form-control" %>
+             <select name="category_id" class="form-select"> 
+                <% @user_categories = Category.where(user_id: current_user) %>
+                <%= @user_categories.each do |category| %>
+                    
+                    <option value="<%= category.id %>"><%= category.category_name %></option>
+                   
+                <% end %>
+            </select>
+                
+        </p>
+
+        <p>
+            <%= f.label :title ,class:"fw-bold"%> <br />
+            <%= f.text_field :title, class:"form-control" %>
+        </p>
+        
+        <div class="col-md-12">
+            <%= f.label :content ,class:"fw-bold"%> <br />
+            <%= f.rich_text_area :content%>
+        </div>
+        
+        <p>
+            <%= f.label :deadline,class:"fw-bold" %> <br />
+            <%= f.datetime_local_field :deadline %>
+        </p>
+
+        <p>
+            <%= f.submit "Add",:class => 'btn btn-success' %>
+        </p>
+    </div>
+</div>
+
+
+<% end %>

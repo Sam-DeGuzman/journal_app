@@ -1,0 +1,41 @@
+<h1 class="display-5">Manage Journal Entries</h1>
+
+
+<% if @entries.any? %>
+
+<div class="row">
+<% @entries.each do |entry| %>    
+<div class="col-sm-6">
+    <div class="card mt-1">
+        <% if entry.category_id == 0 %>
+            <h5 class="card-header fw-bolder" style="background-color:#000000b3;color:#ffffff">Undefined</h5>
+        <% elsif entry.deadline.to_date == Date.today %> 
+            <h5 class="card-header" style="background-color:#eb5a46;color:#ffffff">Due Today</h5>
+        <% else %>
+            <h5 class="card-header" style="background-color:#ff9f1a;color:#ffffff"><%= Category.find(entry.category_id).category_name %></h5>
+        <% end %>
+
+  <div class="card-body">
+    <h5 class="card-title"><%= entry.title %></h5>
+    <p><%= current_user.email %></p>
+      
+    <p class="card-text"><%= truncate(strip_tags(entry.content.to_s), length: 50) %></p>
+      <%= link_to "📓 Review", entry_path(entry),class:"btn btn-primary" %>
+    
+  </div>
+</div>
+</div>
+<% end %>     
+</div>
+<% else %>
+    <%= render 'partials/noitems' %>
+<% end %>
+<br>
+<% if @entries.any? %>
+  
+   <div class="digg_pagination float-end">
+    <%= will_paginate @entries %>
+  </div>
+ 
+ 
+  <% end %>

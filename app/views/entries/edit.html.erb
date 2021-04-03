@@ -1,0 +1,49 @@
+<style>
+    .trix-button-group--file-tools { display: none !important; }
+</style>
+
+<%= form_with url: update_entry_path do |f|%>
+
+<div class="container">
+    <div style="text-align:center;margin:auto;" class="col-md-8 form-floating mb-3">
+       <%= f.hidden_field :id, :value => @entry.id %>
+       <p>
+       <%= f.label :cover_image,"Upload/Update Cover Photo:",class:"fw-bold"%>
+       <%= f.file_field :cover_image %>
+       </p>
+        <p>
+        <%= f.label :topic_id ,class:"fw-bold"%> <br />
+            <%# <%= f.text_field :topic_id, class:"form-control" %>
+             <%@categories = Category.all%>
+             <select name="category_id">
+                <%= @categories.each do |category| %>
+                    <% if category.user == current_user %>
+                      <option value="<%= category.id %>"><%= category.category_name %></option>
+                    <% end %>
+                   
+                <% end %>
+            </select>
+        </p>
+        
+        <p>
+            <%= f.label :title ,class:"fw-bold"%> <br />
+            <%= f.text_field :title, class:"form-control",:value => @entry.title,:required=>true%>
+        </p>
+
+        <p style="text-align:left;">
+            <%= f.label :content ,class:"fw-bold"%> <br />
+            <%= f.rich_text_area(:content,:value => @entry.content,:required=>true)%>
+        </p>
+
+          <p>
+            <%= f.label :deadline,class:"fw-bold" %> <br />
+            <%= f.datetime_local_field :deadline, :required=>true%>
+        </p>
+
+        <p>
+            <%= f.submit "Add",:class => 'btn btn-success' %>
+        </p>
+    </div>
+</div>
+
+<% end %>

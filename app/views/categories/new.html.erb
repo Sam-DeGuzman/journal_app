@@ -1,0 +1,27 @@
+<%= form_with url: create_category_path, html: {class: "form-floating mb-3"} do |f|%>
+
+<div class="container">
+    <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
+
+        <p>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+        </p>   
+
+        <p>
+            <%= f.label :category_name, "Topic Name" ,class:"fw-bold"%> <br />
+            <%= f.text_field :category_name, class:"form-control" %>
+        </p>
+        
+        <p>
+            <%= f.label :description,"Add a short description",class:"fw-bold" %> <br />
+            <%= f.text_area :description,class:"form-control",rows: 2,maxlength:50, required:true %>
+        </p>
+
+        <p>
+            <%= f.submit "Add",:class => 'btn btn-success' %>
+        </p>
+    </div>
+</div>
+
+
+<% end %>

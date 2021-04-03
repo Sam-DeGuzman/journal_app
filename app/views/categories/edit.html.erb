@@ -1,0 +1,23 @@
+<%= form_with url: update_category_path do |f|%>
+
+<div class="container">
+    <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
+       <%= f.hidden_field :id, :value => @category.id %>
+        
+        <p>
+            <%= f.label :category_name ,class:"fw-bold"%> <br />
+            <%= f.text_field :category_name, class:"form-control",:value => @category.category_name,:required=>true%>
+        </p>
+
+        <p>
+            <%= f.label :description,class:"fw-bold" %> <br />
+            <%= f.text_field :description,class:"form-control",:value => @category.description,:required=>true%>
+        </p>
+ 
+        <p>
+            <%= f.submit "Add",:class => 'btn btn-success' %>
+        </p>
+    </div>
+</div>
+
+<% end %>

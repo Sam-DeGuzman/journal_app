@@ -1,0 +1,44 @@
+<div class="card mb-3" style="max-width: 100%;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <% if @entry.cover_image.present? %>
+        <%= image_tag(@entry.cover_image_url, :class=>"card-img-top",:alt=>"cover-image" ) %>
+      <% else %>
+        <img src="https://wallpapercave.com/wp/wp3414789.jpg" class="card-img-top" alt="cover-image">
+    <% end %>
+
+
+      
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title"><%= @entry.title%></h2>
+        <p class="card-text text-muted">Deadline: <%= @entry.deadline.to_date %></p>
+        <% if @entry.category_id == 0 %>
+            <span class="badge bg-secondary">Undefined</span>
+        <% else %>
+            <span class="badge bg-success"><%= Category.find(@entry.category_id).category_name %></span>
+        <% end %>
+        <p class="card-text"><%= @entry.content %>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="row justify-content-start" >
+        <div class="col-md-8 " >
+              <% @user_topics = Category.where(user_id: current_user) %>
+
+                <% if @user_topics.any? %>
+                   <%=link_to ' Edit Article', edit_entry_path, class:"btn btn-info text-light mt-2 ms-2 float-end"%>
+                   <% else %>
+                   <%=link_to ' Edit Article', edit_entry_path, class:"btn btn-secondary text-light mt-2 ms-2 float-end disabled"%>
+                <% end %>
+               
+        <%= link_to ' Delete Article', @entry, method: :delete, data: { confirm: "Confirm deleting '#{@entry.title}' ?" },class:"btn btn-danger mt-2 float-end" %>
+        </div>
+    </div>  
+
+      
+</div>
