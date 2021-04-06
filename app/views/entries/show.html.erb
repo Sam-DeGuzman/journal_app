@@ -26,17 +26,17 @@
   </div>
   
 </div>
-<div class="row justify-content-start" >
+<div class="row justify-content-end" >
         <div class="col-md-8 " >
               <% @user_topics = Category.where(user_id: current_user) %>
 
                 <% if @user_topics.any? %>
-                   <%=link_to ' Edit Article', edit_entry_path, class:"btn btn-info text-light mt-2 ms-2 float-end"%>
+                   <%=link_to ' Edit Entry', edit_entry_path, class:"btn btn-info text-light mt-2 ms-2 float-end"%>
                    <% else %>
-                   <%=link_to ' Edit Article', edit_entry_path, class:"btn btn-secondary text-light mt-2 ms-2 float-end disabled"%>
+                   <%=link_to ' Edit Entry', edit_entry_path, class:"btn btn-secondary text-light mt-2 ms-2 float-end disabled"%>
                 <% end %>
                
-        <%= link_to ' Delete Article', @entry, method: :delete, data: { confirm: "Confirm deleting '#{@entry.title}' ?" },class:"btn btn-danger mt-2 float-end" %>
+        <%= link_to ' Delete Entry', @entry, method: :delete, data: { confirm: "Confirm deleting '#{@entry.title}' ?" },class:"btn btn-danger mt-2 float-end" %>
         </div>
     </div>  
 

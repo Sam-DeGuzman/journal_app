@@ -26,7 +26,7 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'carrierwave'
 gem 'will_paginate', '~> 3.3'
 gem "hashid-rails", "~> 1.0"
-
+gem 'rexml', '~> 3.2', '>= 3.2.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

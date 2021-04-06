@@ -1,7 +1,10 @@
-<nav class="navbar sticky-top navbar-dark navbar-expand-lg bg-dark">
+<nav class="navbar sticky-top navbar-light navbar-expand-lg px-5" style="background-color:#fff;">
     <div class="container-fluid">
-        <%= link_to 'Journal App', root_path, class:"navbar-brand"%>
-        
+
+        <%= link_to(root_path,class:"navbar-brand") do %>
+                <%= 'WriteUp' %>  
+                <i class="fas fa-pencil-alt"></i>
+                <% end %>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,7 +13,7 @@
             <div class="navbar-nav">
                 
                 <% if user_signed_in? %>
-                <%= link_to 'Your Categories', categories_path, class:"nav-link"%>
+                <%= link_to 'Categories', categories_path, class:"nav-link"%>
                 <% @user_topics = Category.where(user_id: current_user) %>
 
                 <% if @user_topics.any? %>
@@ -18,13 +21,23 @@
                 <% else %>
                  <%= link_to 'Add Journal Entry',new_entry_path, class:"nav-link disabled" %>
                 <% end %>
-
+    
                 <%= link_to 'Journal Entries', entries_path, class:"nav-link"%>
                 <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link"%>
                 <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"nav-link"%>  
-                <% else %>  
-                <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link"%>
-                <%= link_to 'Login', new_user_session_path, class:"nav-link"%>
+                <% else %>
+    
+                 <%= link_to(new_user_registration_path,class:"nav-link") do %>
+               <i class="far fa-user"></i>
+                <%= 'Sign Up' %>
+                <% end %>
+
+
+                <%= link_to(new_user_session_path,class:"nav-link") do %>
+                <i class="fas fa-user"></i>
+                <%= "Login" %>
+                <% end %>
+
                 <% end %>
              </div>
         </div>
