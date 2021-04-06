@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   post '/entries/create' => 'entries#create', as: 'create_entry'
   devise_for :users
-  devise_for :views
+  # devise_for :views
 
   resources :categories
   resources :entries
