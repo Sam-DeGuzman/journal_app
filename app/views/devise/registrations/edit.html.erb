@@ -1,66 +1,42 @@
-
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="row justify-content-center">
   <div class="col-md-4 text-center">
-  <h2>Edit Profile and Account Settings</h2>
-  <div class="field">
-    <% if current_user.picture.present? %>
-        <%= image_tag(current_user.picture_url, width: 200, :class => "img-thumbnail",:style =>"border: solid 1px " ) %>
-      <% else %>
-        <%= image_tag("https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg", width: 200, :class => "rounded",:style =>"border: solid 1px " ) %>
-        <%flash.now[:notice] = "Seems you don't have a profile picture yet" %>
-    <% end %>
-      <br>
-      <div class="justify-content-center">
-      <%= f.label :picture,"Upload/Update Your Profile Picture Here" %><br />
-     <%= f.file_field :picture%>
-      </div>
-      
-  </div>
-
-
-  <div class="field">
-     <%= f.text_field :firstname, autofocus: true, class:"form-control mt-2",placeholder:"First Name" %>
-  </div>
-  <div class="field">
-     <%= f.text_field :lastname, class:"form-control mt-2",placeholder:"Last Name"%>
-  </div>
+  <h2>Account Settings</h2>
+  <br>
   <div class="field">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control mt-2",placeholder:"Email" %>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    
-    <%= f.password_field :password, autocomplete: "new-password",class:"form-control mt-2",placeholder:"Password"  %>
-    <i>(leave blank if you don't want to change it)</i>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control mt-2",placeholder:"Confirm Password"%>
-  </div>
-
-  <p>Use Focus Assist?</p>
-  <div class="field">
+<div class="field">
+  Continue Using Focus Assist?
   <%= f.radio_button :focus_assist, true %> 
   <%= f.label :focus_assist, 'Yes', :value => true %>
   <%= f.radio_button :focus_assist, false %>
   <%= f.label :focus_assist, 'No', :value => false %>
   </div>
  
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password",class:"form-control",placeholder: "Current Password" %>
+    <%= f.password_field :password, autocomplete: "new-password",class:"form-control mt-2",placeholder:"Password"  %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control mt-2",placeholder:"Confirm Password"%>
+  </div>
+  <i>(leave blank if you don't want to change it)</i>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+
+
+
+  <div class="field">
+    <%= f.password_field :current_password,:value => current_user.password, autocomplete: "current-password",class:"form-control",placeholder: "Current Password" %>
+     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
   </div>
 
   <div class="actions mb-2">

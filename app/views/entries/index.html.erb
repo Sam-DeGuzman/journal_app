@@ -1,3 +1,13 @@
+<div class="row justify-content-end">
+<div class="col-sm-3 justify-content-end">
+<% if @user_categories.any? %>
+<%= link_to "Add New Entry", new_entry_path,class:"btn btn-success mb-2" %>
+
+<% else %>
+<%= link_to "Add New Entry", new_entry_path,class:"btn btn-success mb-2 disabled" %>
+<% end %>
+</div>
+</div>
 <h2 class="">Manage Journal Entries</h2>
 
 
@@ -11,13 +21,17 @@
             <h5 class="card-header fw-bolder" style="background-color:#000000b3;color:#ffffff">Undefined</h5>
         <% elsif entry.deadline.to_date == Date.today %> 
             <h5 class="card-header" style="background-color:#eb5a46;color:#ffffff">Due Today</h5>
+        <% elsif entry.entry_stat == "To-do" %> 
+            <h5 class="card-header" style="background-color:#eb5a46;color:#ffffff"><%= Category.find(entry.category_id).category_name %></h5>
+        <% elsif entry.entry_stat == "Doing" %> 
+            <h5 class="card-header" style="background-color:orange;color:#ffffff"><%= Category.find(entry.category_id).category_name %></h5>
         <% else %>
-            <h5 class="card-header" style="background-color:#ff9f1a;color:#ffffff"><%= Category.find(entry.category_id).category_name %></h5>
+            <h5 class="card-header bg-success" style="color:#ffffff"><%= Category.find(entry.category_id).category_name %></h5>
         <% end %>
 
   <div class="card-body">
     <h5 class="card-title"><%= entry.title %></h5>
-    <p><%= current_user.email %></p>
+   
       
     <p class="card-text"><%= truncate(strip_tags(entry.content.to_s), length: 50) %></p>
       <%= link_to "📓 Review", entry_path(entry),class:"btn btn-primary" %>

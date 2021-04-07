@@ -5,7 +5,7 @@
 <%= form_with url: create_entry_path, html: {class: "form-floating mb-3"} do |f|%>
 
 <div class="container">
-    <div style="text-align:center;margin:auto;" class="col-md-8 form-floating mb-3">
+    <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
         <p>
             <%= f.hidden_field :user_id, id: :entry_user_id, :value => current_user.id %>
         </p>
@@ -20,29 +20,41 @@
                     <option value="<%= category.id %>"><%= category.category_name %></option>
                    
                 <% end %>
-            </select>
-                
+            </select>   
         </p>
 
+        <div class="form-group mb-3">
+    <%= f.label :entry_stat,"Entry Status", class: 'mb-1 fw-bold' %> <br>
+    <%= f.select :entry_stat, Entry::ENTRY_STAT, {}, class: 'form-control form-select mb-3 shadow-sm' %>
+  </div>
+
         <p>
-            <%= f.label :title ,class:"fw-bold"%> <br />
-            <%= f.text_field :title, class:"form-control" %>
+            <%= f.text_field :title, class:"form-control", placeholder:"Title"%>
         </p>
         
-        <div class="col-md-12">
-            <%= f.label :content ,class:"fw-bold"%> <br />
-            <%= f.rich_text_area :content%>
-        </div>
+        
         
         <p>
             <%= f.label :deadline,class:"fw-bold" %> <br />
-            <%= f.datetime_local_field :deadline %>
+            <%= f.date_field :deadline,class: 'form-control shadow-lg',type:'date',min:Date.today, :required=>true%>
         </p>
 
-        <p>
-            <%= f.submit "Add",:class => 'btn btn-success' %>
-        </p>
+        
     </div>
+    <div class="row justify-content-center">
+    <div class="col-md-7 justify-content-center">
+            <%= f.label :content ,class:"fw-bold"%> <br />
+            <%= f.rich_text_area :content%>
+            <p class="text-center">
+            <%= f.submit "Add this Entry",:class => 'btn btn-success mt-2' %>
+            </p>
+            
+        </div>
+       
+            
+        
+    </div>
+    
 </div>
 
 

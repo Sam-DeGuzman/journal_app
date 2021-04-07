@@ -19,6 +19,13 @@
         <% else %>
             <span class="badge bg-success"><%= Category.find(@entry.category_id).category_name %></span>
         <% end %>
+         <% if @entry.entry_stat == "To-do" %>
+            <span class="badge bg-danger"><%= @entry.entry_stat %></span>
+        <% elsif @entry.entry_stat == "Doing"%>
+            <span class="badge bg-warning"><%= @entry.entry_stat %></span>
+        <% else %>
+            <span class="badge bg-success"><%= @entry.entry_stat %></span>
+        <% end %>
         <p class="card-text"><%= @entry.content %>
         
       </div>

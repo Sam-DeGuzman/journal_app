@@ -5,7 +5,7 @@
 <%= form_with url: update_entry_path do |f|%>
 
 <div class="container">
-    <div style="text-align:center;margin:auto;" class="col-md-8 form-floating mb-3">
+    <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
        <%= f.hidden_field :id, :value => @entry.id %>
        <p>
        <%= f.label :cover_image,"Upload/Update Cover Photo:",class:"fw-bold"%>
@@ -24,6 +24,10 @@
                 <% end %>
             </select>
         </p>
+        <div class="form-group mb-3">
+    <%= f.label :entry_stat,"Entry Status", class: 'mb-1 fw-bold' %> <br>
+    <%= f.select :entry_stat, Entry::ENTRY_STAT, {}, class: 'form-control form-select mb-3 shadow-sm' %>
+  </div>
         
         <p>
             <%= f.label :title ,class:"fw-bold"%> <br />
@@ -37,7 +41,7 @@
 
           <p>
             <%= f.label :deadline,class:"fw-bold" %> <br />
-            <%= f.datetime_local_field :deadline, :required=>true%>
+            <%= f.date_field :deadline,class: 'form-control shadow-md',:value => @entry.deadline.to_date,type:'date',min:Date.today, :required=>true%>
         </p>
 
         <p>

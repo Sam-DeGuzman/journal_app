@@ -12,6 +12,7 @@ class EntriesController < ApplicationController
     @entry.category_id = params[:category_id]
     @entry.user_id = params[:user_id]
     @entry.title = params[:title]
+    @entry.entry_stat = params[:entry_stat]
     @entry.content = params[:content]
     @entry.deadline = params[:deadline]
     
@@ -39,9 +40,10 @@ class EntriesController < ApplicationController
   end
 
   def index
+    @user_categories = Category.where(user_id: current_user)
     @getduetoday = current_user.entries.where(deadline: Date.today.all_day)
     if current_user.focus_assist == true
-      flash.now[:notice] = 'Focus Assist is Turned On, Limiting the result to show only today`s creation, you can turn it off at `Edit Profile` Section '
+      flash.now[:notice] = 'Focus Assist is Turned On, Limiting the results to only show entries due today, you can turn it off at the "Account Settings" Section '
         @entries = @getduetoday.paginate(page: params[:page],per_page:5)
     else
       @entries = current_user.entries.paginate(page: params[:page],per_page:5)
@@ -65,7 +67,7 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find_by_id(params[:id])
-        @entry.update(category_id: params[:category_id],cover_image: params[:cover_image],title:params[:title], content: params[:content], deadline: params[:deadline])
+        @entry.update(category_id: params[:category_id],cover_image: params[:cover_image],title:params[:title], entry_stat: params[:entry_stat] ,content: params[:content], deadline: params[:deadline])
 
         if @entry.save
           # redirect to index.html.erb on successful save
