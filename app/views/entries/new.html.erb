@@ -6,10 +6,18 @@
 
 <div class="container">
     <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
+    <h2 style="font-family: 'Courgette', cursive;">Add a new Journal Entry</h2>
         <p>
             <%= f.hidden_field :user_id, id: :entry_user_id, :value => current_user.id %>
         </p>
-    
+         <p>
+            <%= f.text_field :title, class:"form-control", placeholder:"Title"%>
+        </p>
+        
+         <p>
+       <%= f.label :cover_image,"Upload Entry Photo: (Optional)",class:"fw-bold"%><br>
+       <%= f.file_field :cover_image %>
+       </p>
         <p>
             <%= f.label :category_id ,class:"fw-bold"%> <br />
             <%# <%= f.text_field :topic_id, class:"form-control" %>
@@ -28,10 +36,7 @@
     <%= f.select :entry_stat, Entry::ENTRY_STAT, {}, class: 'form-control form-select mb-3 shadow-sm' %>
   </div>
 
-        <p>
-            <%= f.text_field :title, class:"form-control", placeholder:"Title"%>
-        </p>
-        
+       
         
         
         <p>

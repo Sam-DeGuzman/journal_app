@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Hashid::Rails
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  validates :firstname, :lastname, presence: true
+  validates :firstname, :lastname, :email, :encrypted_password, presence: true
 
   before_save :capitalize_names
 

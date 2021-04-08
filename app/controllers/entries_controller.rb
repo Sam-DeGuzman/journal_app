@@ -11,6 +11,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new    
     @entry.category_id = params[:category_id]
     @entry.user_id = params[:user_id]
+    @entry.cover_image = params[:cover_image]
     @entry.title = params[:title]
     @entry.entry_stat = params[:entry_stat]
     @entry.content = params[:content]
@@ -18,8 +19,7 @@ class EntriesController < ApplicationController
     
     if @entry.save
       # redirect to index.html.erb on successful save
-      flash.now[:notice] = 'Successfully saved'
-      render :new
+      redirect_to entries_path, notice: 'Successfully saved'
     else
       flash.now[:alert] = 'Missing Required fields!'
       render :new
@@ -71,13 +71,9 @@ class EntriesController < ApplicationController
 
         if @entry.save
           # redirect to index.html.erb on successful save
-          flash.now[:notice] = 'Changes saved Successfully'
-          redirect_to entries_path
+          redirect_to entries_path, notice: "Changes Saved Successfully!"
         else
-    
-          flash.now[:alert] = 'Error saving changes, one or more missing fields'
-          render :new
-    
+          redirect_to entries_path, alert: "Error changing changes"
         end
   end
 

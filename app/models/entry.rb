@@ -9,8 +9,7 @@ class Entry < ApplicationRecord
     has_rich_text :content
     mount_uploader :cover_image, PictureUploader
 
-    
-
     ENTRY_STAT = [
         [ 'To-do'], ['Doing'], ['Done']].freeze
+        
 end

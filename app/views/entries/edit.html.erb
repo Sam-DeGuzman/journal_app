@@ -6,16 +6,19 @@
 
 <div class="container">
     <div style="text-align:center;margin:auto;" class="col-md-5 form-floating mb-3">
-       <%= f.hidden_field :id, :value => @entry.id %>
+        <h2 style="font-family: 'Courgette', cursive;">Update Entry</h2>
+       <%= f.hidden_field :id, :value => @entry.id %> <p>
+            <%= f.text_field :title, class:"form-control",:value => @entry.title,placeholder:"Title",:required=>true%>
+        </p>
        <p>
-       <%= f.label :cover_image,"Upload/Update Cover Photo:",class:"fw-bold"%>
+       <%= f.label :cover_image,"Upload/Update Entry Photo: (Optional)",class:"fw-bold"%>
        <%= f.file_field :cover_image %>
        </p>
         <p>
         <%= f.label :topic_id ,class:"fw-bold"%> <br />
             <%# <%= f.text_field :topic_id, class:"form-control" %>
              <%@categories = Category.all%>
-             <select name="category_id">
+             <select name="category_id", class="form-select">
                 <%= @categories.each do |category| %>
                     <% if category.user == current_user %>
                       <option value="<%= category.id %>"><%= category.category_name %></option>
@@ -29,10 +32,7 @@
     <%= f.select :entry_stat, Entry::ENTRY_STAT, {}, class: 'form-control form-select mb-3 shadow-sm' %>
   </div>
         
-        <p>
-            <%= f.label :title ,class:"fw-bold"%> <br />
-            <%= f.text_field :title, class:"form-control",:value => @entry.title,:required=>true%>
-        </p>
+       
 
         <p style="text-align:left;">
             <%= f.label :content ,class:"fw-bold"%> <br />
@@ -45,7 +45,7 @@
         </p>
 
         <p>
-            <%= f.submit "Add",:class => 'btn btn-success' %>
+            <%= f.submit "Update Entry",:class => 'btn btn-success' %>
         </p>
     </div>
 </div>

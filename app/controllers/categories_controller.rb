@@ -13,10 +13,10 @@ class CategoriesController < ApplicationController
 
     if @category.save
       # redirect to index.html.erb on successful save
-      flash.now[:notice] = 'Topic Successfully created'
-      render :new
+      flash.now[:notice] = 'Category Successfully created'
+      redirect_to categories_path
     else
-      flash.now[:alert] = 'Error Adding Topic Entry Has Duplicate'
+      flash.now[:alert] = 'Error Adding Category, Has Duplicate'
       render :new
 
     end
@@ -42,11 +42,10 @@ class CategoriesController < ApplicationController
     @update_category.update(category_name: params[:category_name], description: params[:description])
 
     if @update_category.save
-      flash.now[:notice] = 'Changes saved Successful'
-      render :new
+      redirect_to categories_path, notice: 'Changes saved Successful'
+      
     else
-      flash.now[:alert] = 'Error saving changes, one or more field/s missing'
-      render :new
+      redirect_to categories_path, alert: 'Error saving changes, one or more field/s missing'
     end
   end
 end

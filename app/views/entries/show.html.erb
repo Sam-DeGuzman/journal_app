@@ -38,7 +38,7 @@
               <% @user_topics = Category.where(user_id: current_user) %>
 
                 <% if @user_topics.any? %>
-                   <%=link_to ' Edit Entry', edit_entry_path, class:"btn btn-info text-light mt-2 ms-2 float-end"%>
+                   <%=link_to ' Edit Entry', edit_entry_path, class:"btn btn-primary text-light mt-2 ms-2 float-end"%>
                    <% else %>
                    <%=link_to ' Edit Entry', edit_entry_path, class:"btn btn-secondary text-light mt-2 ms-2 float-end disabled"%>
                 <% end %>

@@ -1,9 +1,9 @@
 <div class="row justify-content-end">
 <div class="col-sm-3 justify-content-end">
-<%= link_to "Add New Category", new_category_path,class:"btn btn-success mb-2" %>
+<%= link_to "Add New Category", new_category_path,class:"btn btn-success mb-2 float-end" %>
 </div>
 </div>
-<h2 >Your Categories</h2>
+<h2 style="font-family: 'Courgette', cursive;" >Your Categories</h2>
 <% if @user_categories.any? %>
   
 <div class="row">
@@ -13,8 +13,8 @@
       <div class="card-body">
         <h5 class="card-title"><%= category.category_name %></h5>
         <p class="card-text"><%= category.description %></p>
-         <td><%= link_to 'Edit Category', edit_category_path(category.id), class:"btn btn-info text-light"%></td>
-         <td><%= link_to ' Delete Category', Category.find_by_id(category.id), method: :delete, data: { confirm: "Confirm deleting '#{category.category_name}' ?" },class:"btn btn-danger" %></td>  
+         <td><%= link_to 'Edit Category', edit_category_path(category.id), class:"btn btn-info text-dark mt-2"%></td>
+         <td><%= link_to ' Delete Category', Category.find_by_id(category.id), method: :delete, data: { confirm: "Confirm deleting '#{category.category_name}' ?" },class:"btn btn-danger mt-2" %></td>  
       </div>
     </div>
   </div>

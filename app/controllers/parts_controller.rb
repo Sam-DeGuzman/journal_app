@@ -8,11 +8,10 @@ class PartsController < ApplicationController
       @user.update(firstname: params[:firstname],lastname: params[:lastname],picture: params[:picture])
 
       if @user.save
-        flash.now[:notice] = 'Changes saved Successfully'
-        redirect_to root_path
+        redirect_to root_path, notice: "Profile Settings Changes Saved Successfully!"
       else
-        flash.now[:alert] = 'Error saving changes, one or more missing fields'
-        redirect_to edit_profile_path
+        redirect_to edit_profile_path, alert: "Error saving changes, one or more missing fields"
+       
       end
   end
 
