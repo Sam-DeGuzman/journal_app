@@ -1,10 +1,11 @@
 class Category < ApplicationRecord
     include Hashid::Rails
-    validates :category_name, uniqueness: true
-    has_many :entries
+    validates :category_name,:user_id, presence: true, uniqueness: true
+    validates :description, presence: true
     
+    
+    has_many :entries
     before_destroy :reset_entries_category_id
-
     belongs_to :user
 
 

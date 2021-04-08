@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController  
   def index
-    @user_categories = Category.where(user_id: current_user)
+    @user_categories = Category.where(user_id: current_user).paginate(page: params[:page],per_page:5)
+   
   end
 
   def create

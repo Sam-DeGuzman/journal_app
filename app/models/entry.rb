@@ -1,6 +1,6 @@
 class Entry < ApplicationRecord
     include Hashid::Rails
-    validates :title,:content,:deadline, presence: true 
+    validates :category_id, :user_id,:title,:content,:deadline, presence: true 
     validates :entry_stat, inclusion: { in: ['To-do', 'Doing', 'Done']}
     
     belongs_to :user
