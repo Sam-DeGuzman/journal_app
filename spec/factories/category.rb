@@ -5,7 +5,6 @@ FactoryBot.define do
       category_name {"Sample Category Name"}
       description {"Sample Category Description"}
       
-      # Add additional fields as required via your User model
     end
   
   end
