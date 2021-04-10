@@ -27,6 +27,7 @@ gem 'carrierwave'
 gem 'will_paginate', '~> 3.3'
 gem "hashid-rails", "~> 1.0"
 gem 'rexml', '~> 3.2', '>= 3.2.5'
+
 gem 'dotenv-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

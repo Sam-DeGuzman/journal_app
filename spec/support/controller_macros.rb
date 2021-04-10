@@ -1,7 +1,8 @@
 module ControllerMacros
   def login_user
-    # Before each test, create and login the user
     before(:each) do
+
+      # Creates User and Category
       @request.env["devise.mapping"] = Devise.mappings[:user]
       user = FactoryBot.create(:user)
       category = FactoryBot.create(:category)

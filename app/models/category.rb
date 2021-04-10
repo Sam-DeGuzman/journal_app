@@ -1,8 +1,8 @@
 class Category < ApplicationRecord
     include Hashid::Rails
 
-    validates :user_id,:category_name,:description, presence: true
-   
+    validates :user_id,:description, presence: true
+    validates :category_name, presence: true
     validates :category_name, uniqueness: true
     
     has_many :entries
