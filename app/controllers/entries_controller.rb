@@ -8,14 +8,7 @@ class EntriesController < ApplicationController
   end
   
   def create
-    @entry = Entry.new    
-    @entry.category_id = params[:category_id]
-    @entry.user_id = params[:user_id]
-    @entry.cover_image = params[:cover_image]
-    @entry.title = params[:title]
-    @entry.entry_stat = params[:entry_stat]
-    @entry.content = params[:content]
-    @entry.deadline = params[:deadline]
+    @entry = Entry.create(entries_params)
     
     if @entry.save
       # redirect to index.html.erb on successful save
@@ -67,7 +60,7 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find_by_id(params[:id])
-        @entry.update(category_id: params[:category_id],cover_image: params[:cover_image],title:params[:title], entry_stat: params[:entry_stat] ,content: params[:content], deadline: params[:deadline])
+        @entry.update(entries_params)
 
         if @entry.save
           # redirect to index.html.erb on successful save
@@ -77,5 +70,13 @@ class EntriesController < ApplicationController
         end
   end
 
+  private 
+
+  def entries_params
+
+    params.permit(
+     :category_id,:user_id,:cover_image,:title,:entry_stat,:content,:deadline)
+    
+  end
   
 end

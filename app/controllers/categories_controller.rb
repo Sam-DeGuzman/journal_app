@@ -5,12 +5,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new    
-    @category.user_id = params[:user_id]
-    @category.description = params[:description]
-    @category.category_name = params[:category_name]
-    
-
+    @category = Category.create(categories_params)
+ 
     if @category.save
       # redirect to index.html.erb on successful save
       flash.now[:notice] = 'Category Successfully created'
@@ -39,7 +35,7 @@ class CategoriesController < ApplicationController
 
   def update
     @update_category = Category.find_by_id(params[:id])
-    @update_category.update(category_name: params[:category_name], description: params[:description])
+    @update_category.update(categories_params)
 
     if @update_category.save
       redirect_to categories_path, notice: 'Changes saved Successful'
@@ -47,5 +43,13 @@ class CategoriesController < ApplicationController
     else
       redirect_to categories_path, alert: 'Error saving changes, one or more field/s missing'
     end
+  end
+
+  private
+
+  def categories_params
+
+    params.permit(:user_id,:category_name,:description)
+    
   end
 end
