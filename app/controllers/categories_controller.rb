@@ -14,7 +14,6 @@ class CategoriesController < ApplicationController
     else
       flash.now[:alert] = 'Error Adding Category, Has Duplicate'
       render :new
-
     end
   end
 
